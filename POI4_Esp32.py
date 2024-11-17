@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import network
 import time
 import json
@@ -156,4 +155,3 @@ def main():
 
 if __name__ == '__main__':
     main()
->>>>>>> dbb63b29a9600f0daf4cc415c3e0e7330628ca70
