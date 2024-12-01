@@ -8,8 +8,8 @@ import dht
 from machine import ADC
 
 # Configurações da rede Wi-Fi
-SSID = 'Carlos.Coelho'
-PASSWORD = 'qwer1234'
+SSID = 'Nome da Rede'
+PASSWORD = 'Senha da Rede'
 
 # Configurações do broker MQTT
 BROKER = 'broker.hivemq.com'
