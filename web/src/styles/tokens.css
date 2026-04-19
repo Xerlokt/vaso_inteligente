@@ -1,0 +1,76 @@
+:root {
+  /* Brand Colors */
+  --color-purple:         #C172FF;
+  --color-dark-purple:    #57148B;
+  --color-purple-glow:    rgba(193, 114, 255, 0.25);
+
+  --color-green:          #89E55E;
+  --color-dark-green:     #277005;
+  --color-green-glow:     rgba(137, 229, 94, 0.3);
+
+  --color-greenblue:      #A3F4FF;
+  --color-dark-greenblue: #018B9E;
+
+  --color-yellow:         #FFDF6D;
+  --color-dark-yellow:    #FFC908;
+
+  --color-red:            #F96F6F;
+  --color-dark-red:       #FD2121;
+
+  --color-blue:           #95D3FF;
+  --color-dark-blue:      #3DAEFF;
+
+  /* Neutral */
+  --color-text:           #2D2D2D;
+  --color-text-muted:     #6B7280;
+  --color-white:          #FFFFFF;
+  --color-surface:        rgba(255, 255, 255, 0.95);
+  --color-surface-hover:  rgba(255, 255, 255, 0.98);
+
+  /* Background layers */
+  --bg-deep:              #0D1F0F;
+  --bg-mid:               #162B18;
+  --bg-glass:             rgba(13, 31, 15, 0.6);
+
+  /* Typography */
+  --font-family:          'KumbhSans', sans-serif;
+  --font-size-xs:         12px;
+  --font-size-sm:         14px;
+  --font-size-base:       16px;
+  --font-size-md:         18px;
+  --font-size-lg:         20px;
+  --font-size-xl:         24px;
+  --font-size-2xl:        32px;
+  --font-size-3xl:        48px;
+
+  /* Spacing (8px grid) */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* Radii */
+  --radius-sm:   8px;
+  --radius-md:   16px;
+  --radius-lg:   24px;
+  --radius-xl:   32px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-card:    0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-mascot:  0 16px 48px rgba(0, 0, 0, 0.2), 0 4px 16px rgba(193, 114, 255, 0.15);
+  --shadow-hover:   0 20px 60px rgba(0, 0, 0, 0.18), 0 6px 20px rgba(193, 114, 255, 0.2);
+  --shadow-inset:   inset 0 2px 8px rgba(0, 0, 0, 0.06);
+
+  /* Transitions */
+  --transition-fast:   150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base:   250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow:   400ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}

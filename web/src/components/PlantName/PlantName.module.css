@@ -1,0 +1,66 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.input {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-white);
+  background: transparent;
+  border: none;
+  outline: none;
+  text-align: center;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: border-bottom var(--transition-fast), color var(--transition-fast);
+  border-bottom: 2px solid transparent;
+  padding-bottom: 2px;
+  min-width: 10px;
+  max-width: 260px;
+}
+
+.input:read-only {
+  cursor: default;
+}
+
+.input:not(:read-only) {
+  border-bottom-color: var(--color-purple);
+  color: var(--color-white);
+}
+
+.input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.editBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background var(--transition-fast), transform var(--transition-bounce);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.editBtn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.1);
+}
+
+.editBtn:active {
+  transform: scale(0.95);
+}
+
+.editIcon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}

@@ -1,0 +1,121 @@
+.wrapper {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: var(--radius-full);
+  background: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-mascot);
+  border: 3px solid var(--color-purple);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.ring {
+  position: absolute;
+  inset: -8px;
+  border-radius: var(--radius-full);
+  border: 2px solid transparent;
+  pointer-events: none;
+  transition: border-color var(--transition-slow), box-shadow var(--transition-slow);
+}
+
+.svg {
+  width: 110px;
+  height: 110px;
+  transform-origin: bottom center;
+}
+
+/* ── health-100: healthy, gentle bob ── */
+.health100 .ring {
+  border-color: var(--color-green);
+  box-shadow: 0 0 24px var(--color-green-glow), 0 0 48px var(--color-green-glow);
+}
+.health100 .svg {
+  animation: bob 3s ease-in-out infinite;
+}
+
+/* ── health-60: slight stress, slow sway ── */
+.health60 .ring {
+  border-color: var(--color-yellow);
+  box-shadow: 0 0 16px rgba(255, 223, 109, 0.2);
+}
+.health60 .svg {
+  animation: sway 4s ease-in-out infinite;
+}
+
+/* ── health-30: stressed, droop ── */
+.health30 .ring {
+  border-color: var(--color-red);
+  box-shadow: 0 0 12px rgba(249, 111, 111, 0.2);
+}
+.health30 .svg {
+  animation: droop 5s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+/* ── health-0: wilted, pulse ── */
+.health0 .ring {
+  border-color: var(--color-dark-red);
+  animation: pulseRing 2s ease-in-out infinite;
+}
+.health0 .svg {
+  animation: wilt 6s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+/* ── Keyframes ── */
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+@keyframes sway {
+  0%, 100% { transform: rotate(0deg); }
+  30%       { transform: rotate(3deg); }
+  70%       { transform: rotate(-3deg); }
+}
+
+@keyframes droop {
+  0%, 100% { transform: rotate(0deg) translateY(0); }
+  50%       { transform: rotate(-6deg) translateY(4px); }
+}
+
+@keyframes wilt {
+  0%, 100% { transform: rotate(-10deg) translateY(6px) scaleY(0.92); }
+  50%       { transform: rotate(-14deg) translateY(8px) scaleY(0.88); }
+}
+
+@keyframes pulseRing {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(253, 33, 33, 0.4); }
+  50%       { box-shadow: 0 0 0 12px rgba(253, 33, 33, 0); }
+}
+
+/* ── Soil bed decoration ── */
+.soil {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 48px;
+  background: linear-gradient(180deg, #8B5E3C 0%, #6B4226 100%);
+  border-radius: 0 0 var(--radius-full) var(--radius-full);
+}
+
+.soilDots {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.3);
+}
