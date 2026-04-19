@@ -1,5 +1,3 @@
-import init from 'react_native_mqtt';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useState, useCallback } from 'react';
 import { Text, View, ScrollView, Image } from 'react-native';
 import { useFonts } from 'expo-font';
@@ -11,15 +9,6 @@ import PlantMascot from './src/components/PlantMascot';
 import PlantName   from './src/components/PlantName';
 import StatusBadge from './src/components/StatusBadge';
 import SensorCard  from './src/components/SensorCard';
-
-init({
-  size: 10000,
-  storageBackend: AsyncStorage,
-  defaultExpires: 1000 * 3600 * 24,
-  enableCache: true,
-  reconnect: true,
-  sync: {},
-});
 
 const ALL_GOOD = {
   key: 'ok',
