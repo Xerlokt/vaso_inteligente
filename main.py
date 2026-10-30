@@ -2,14 +2,12 @@ import network
 import time
 import json
 from umqtt.simple import MQTTClient
-import random
-from machine import Pin
+from machine import Pin, ADC
 import dht
-from machine import ADC
 
 # Configurações da rede Wi-Fi
-SSID = 'Nome da Rede'
-PASSWORD = 'Senha da Rede'
+SSID = 'Carlos.Coelho'
+PASSWORD = 'Co3lhoH@me'
 
 # Configurações do broker MQTT
 BROKER = 'broker.hivemq.com'
@@ -34,27 +32,49 @@ def conectar_wifi():
     print('Conectado ao Wi-Fi:', wlan.ifconfig())
     return wlan
 
-def ler_sensores():
-    # Leitura dos sensores
-    sensor_dht.measure()
-    temperatura = sensor_dht.temperature()
-    umidade_ar = sensor_dht.humidity()
-    umidade_solo = umidade_solo_sensor.read() / 4095 * 100  # Converte para percentual
-    umidade_solo = 100 - umidade_solo  # Inverte o valor
+def ler_dht():
+    # Retorna (temperatura, umidade_ar) ou None se o DHT22 não responder
+    for tentativa in range(2):
+        try:
+            sensor_dht.measure()
+            return round(sensor_dht.temperature(), 2), round(sensor_dht.humidity(), 2)
+        except Exception as e:
+            print(f'DHT22 indisponível (tentativa {tentativa + 1}): {e}')
+            time.sleep(2)  # DHT22 precisa de ~2s entre leituras
+    return None
 
-    # Formata as leituras com duas casas decimais
-    print(f"Leitura atual dos sensores - Umidade do Solo: {umidade_solo:.2f}%, Temperatura: {temperatura:.2f}°C, Umidade do Ar: {umidade_ar:.2f}%")
-    return round(umidade_solo, 2), round(temperatura, 2), round(umidade_ar, 2)
+def ler_solo():
+    # Retorna a umidade do solo em % ou None se a leitura falhar
+    try:
+        valor = umidade_solo_sensor.read() / 4095 * 100
+        return round(100 - valor, 2)  # Inverte o valor
+    except Exception as e:
+        print(f'Sensor de solo indisponível: {e}')
+        return None
+
+def coletar_dados():
+    # Inclui apenas os sensores que funcionaram
+    dados = {}
+
+    leitura_dht = ler_dht()
+    if leitura_dht is not None:
+        dados['temperatura'], dados['umidade_ar'] = leitura_dht
+
+    umidade_solo = ler_solo()
+    if umidade_solo is not None:
+        dados['umidade_solo'] = umidade_solo
+
+    return dados
 
 def publicar_mqtt(client):
-    umidade_solo, temperatura, umidade_ar = ler_sensores()
-    dados = {
-        "umidade_solo": umidade_solo,
-        "temperatura": temperatura,
-        "umidade_ar": umidade_ar
-    }
-    dados_json = json.dumps(dados)
-    client.publish(TOPICO_PUBLISH, dados_json)
+    dados = coletar_dados()
+
+    if not dados:
+        print('Nenhum sensor funcionando. Nada a publicar.')
+        return
+
+    print('Leitura atual dos sensores:', dados)
+    client.publish(TOPICO_PUBLISH, json.dumps(dados))
     print(f'Dados publicados no tópico {TOPICO_PUBLISH}')
 
 def main():

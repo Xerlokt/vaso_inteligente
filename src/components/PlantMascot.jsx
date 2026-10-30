@@ -1,17 +1,21 @@
 import { View } from 'react-native';
-import { Video } from 'expo-av';
+import { VideoView, useVideoPlayer } from 'expo-video';
 import { styles } from '../style/style';
 
 export default function PlantMascot({ videoSource }) {
+  const player = useVideoPlayer(videoSource, (p) => {
+    p.loop = true;
+    p.muted = true;
+    p.play();
+  });
+
   return (
     <View style={styles.plantBody}>
-      <Video
-        source={videoSource}
+      <VideoView
+        player={player}
         style={styles.plantVideo}
-        resizeMode="contain"
-        isLooping
-        isMuted
-        shouldPlay
+        contentFit="contain"
+        nativeControls={false}
       />
     </View>
   );
